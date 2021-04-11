@@ -1,0 +1,61 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      app: scaling
+    name: scaling
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: scaling
+    strategy: {}
+    template:
+      metadata:
+        labels:
+          app: scaling
+      spec:
+        containers:
+        - image: nakanakau/scaling:latest
+          name: scaling
+  status: {}
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: scaling
+    name: scaling
+  spec:
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: scaling
+  status:
+    loadBalancer: {}
+
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      haproxy.router.openshift.io/timeout: 120s
+    labels:
+      app: scaling
+    name: scaling
+  spec:
+    host: ""
+    port:
+      targetPort: 8080
+    subdomain: ""
+    to:
+      kind: ""
+      name: scaling
+      weight: null
+  status:
+    ingress: null
+kind: List
+metadata: {}
