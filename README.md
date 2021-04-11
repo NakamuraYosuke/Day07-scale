@@ -248,7 +248,7 @@ $ watch kubectl get hpa loadtest
 ```
 下記のように、TARGETSのCPU使用率が上昇し、REPLICAS列の値が徐々にスケールアウトしていくことが確認できます。
 ```
-Every 2.0s: kubectl get hpa loadtest                                                               AKFVFZT2Z8LYWP.local: Mon Apr 12 03:18:47 2021
+Every 2.0s: kubectl get hpa loadtest
 
 NAME       REFERENCE             TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
 loadtest   Deployment/loadtest   192%/50%   2         10        8          12m
