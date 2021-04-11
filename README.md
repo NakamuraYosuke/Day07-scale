@@ -327,7 +327,8 @@ routeを確認してアプリケーションにアクセスします。
 $ kubectl get route scaling
 NAME      HOST/PORT                        PATH   SERVICES   PORT   TERMINATION   WILDCARD
 scaling   scaling-scale.apps-crc.testing          scaling    8080                 None
-
+```
+```
 $ curl -s http://scaling-scale.apps-crc.testing
 Server IP: 10.217.0.87 
 ```
@@ -336,8 +337,10 @@ Podに割り振られたCluster IPが表示されます。
 Podを3に増やし、再度アプリケーションにアクセスします。
 ```
 $ kubectl scale --replicas 3 deployment scaling
-
-$ for x in {1..100}; do curl -s http://scaling-scale.apps-crc.testing; done;
+```
+下記はscalingアプリケーションに30回のアクセスを試行するものです。
+```
+$ for x in {1..30}; do curl -s http://scaling-scale.apps-crc.testing; done;
 Server IP: 10.217.0.87 
 Server IP: 10.217.0.88 
 Server IP: 10.217.0.89 
