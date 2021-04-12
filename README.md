@@ -155,7 +155,6 @@ items:
             limits:
               cpu: "100m"
               memory: 100Mi
-  status: {}
 
 - apiVersion: v1
   kind: Service
@@ -170,8 +169,6 @@ items:
       targetPort: 8080
     selector:
       app: loadtest
-  status:
-    loadBalancer: {}
 
 - apiVersion: route.openshift.io/v1
   kind: Route
@@ -190,8 +187,6 @@ items:
       kind: ""
       name: loadtest
       weight: null
-  status:
-    ingress: null
 kind: List
 metadata: {}
 ```
@@ -278,7 +273,6 @@ items:
         containers:
         - image: nakanakau/scaling:latest
           name: scaling
-  status: {}
 
 - apiVersion: v1
   kind: Service
@@ -293,8 +287,6 @@ items:
       targetPort: 8080
     selector:
       app: scaling
-  status:
-    loadBalancer: {}
 
 - apiVersion: route.openshift.io/v1
   kind: Route
@@ -313,8 +305,6 @@ items:
       kind: ""
       name: scaling
       weight: null
-  status:
-    ingress: null
 kind: List
 metadata: {}
 ```
@@ -340,10 +330,10 @@ $ kubectl scale --replicas 3 deployment scaling
 ```
 下記はscalingアプリケーションに30回のアクセスを試行するものです。
 ```
-$ for x in {1..30}; do curl -s http://scaling-scale.apps-crc.testing; done;
-Server IP: 10.217.0.87 
-Server IP: 10.217.0.88 
-Server IP: 10.217.0.89 
+$ for x in {1..30}; do curl -s http://scaling-scale.apps-crc.testing; done
+Server IP: 10.217.0.87
+Server IP: 10.217.0.88
+Server IP: 10.217.0.89
 ・・・
 ```
 増やしたPodに対してもアクセスが分散されていることが確認できます。

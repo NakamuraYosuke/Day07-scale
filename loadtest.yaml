@@ -27,7 +27,6 @@ items:
             limits:
               cpu: "100m"
               memory: 100Mi
-  status: {}
 
 - apiVersion: v1
   kind: Service
@@ -42,8 +41,6 @@ items:
       targetPort: 8080
     selector:
       app: loadtest
-  status:
-    loadBalancer: {}
 
 - apiVersion: route.openshift.io/v1
   kind: Route
@@ -62,7 +59,5 @@ items:
       kind: ""
       name: loadtest
       weight: null
-  status:
-    ingress: null
 kind: List
 metadata: {}

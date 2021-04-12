@@ -20,7 +20,6 @@ items:
         containers:
         - image: nakanakau/scaling:latest
           name: scaling
-  status: {}
 
 - apiVersion: v1
   kind: Service
@@ -35,8 +34,6 @@ items:
       targetPort: 8080
     selector:
       app: scaling
-  status:
-    loadBalancer: {}
 
 - apiVersion: route.openshift.io/v1
   kind: Route
@@ -55,7 +52,5 @@ items:
       kind: ""
       name: scaling
       weight: null
-  status:
-    ingress: null
 kind: List
 metadata: {}
